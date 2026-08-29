@@ -10,15 +10,23 @@ load_dotenv()
 # Inicializar extensiones
 db = SQLAlchemy()
 
+# Raíz del proyecto (un nivel arriba de app/)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_DB = 'sqlite:///' + os.path.join(BASE_DIR, 'database', 'ecommerce.db')
+
+
 def create_app():
     app = Flask(__name__)
     
     # Configuración
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'HolaMundo')
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///database/ecommerce.db')
+
+    database_url = os.getenv('DATABASE_URL') or DEFAULT_DB
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['JSON_AS_ASCII'] = False  # Para caracteres especiales en JSON
-    
+
+    print(f"Base de datos: {database_url}")
     # Inicializar extensiones con la app
     db.init_app(app)
     CORS(app)  # Permitir CORS para frontend
