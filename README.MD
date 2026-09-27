@@ -29,6 +29,7 @@ ecommerce-api/
 1. **Clonar y navegar al proyecto**
 ```bash
 cd ecommerce-api
+# cd Ecommerce-Api-Python
 ```
 
 2. **Crear entorno virtual**
@@ -43,6 +44,7 @@ source venv/bin/activate
 3. **Instalar dependencias**
 ```bash
 pip install -r requirements.txt
+# pip install -r requirement.txt
 ```
 
 4. **Configurar variables de entorno**
